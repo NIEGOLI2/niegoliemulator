@@ -1,0 +1,473 @@
+:root {
+    --bg: #05070a;
+    --bg-alt: #0c1118;
+    --accent: #5aa9ff; /* replaced green with soft blue */
+    --accent-soft: rgba(90,169,255,0.12);
+    --accent-strong: rgba(90,169,255,0.28);
+    --danger: #ff3366;
+    --fg: #e5f3ff;
+    --fg-muted: #7d8a99;
+    --border: #151c27;
+    --radius: 6px;
+    --font-ui: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Ensure mobile-only controls are hidden by default (desktop); shown only inside the mobile media query below */
+.mobile-only {
+    display: none;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #101520 0, #05070a 55%);
+    color: var(--fg);
+    font-family: var(--font-ui);
+}
+
+/* Root layout */
+#app-root {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* T4CTIC Top Bar */
+#t4-bar {
+    flex: 0 0 54px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    background: linear-gradient(90deg, #05070a 0, #090d13 45%, #05070a 100%);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 8px 20px rgba(0,0,0,0.7);
+    z-index: 2;
+}
+
+#t4-bar .t4-left,
+#t4-bar .t4-center,
+#t4-bar .t4-right {
+    display: flex;
+    align-items: center;
+}
+
+#t4-bar .t4-left {
+    flex: 0 0 auto;
+}
+
+#t4-bar .t4-center {
+    flex: 1 1 auto;
+    justify-content: center;
+    gap: 8px;
+}
+
+#t4-bar .t4-right {
+    flex: 0 0 auto;
+    gap: 6px;
+}
+
+#t4-logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--accent-strong);
+    background: radial-gradient(circle at 0 0, rgba(69,255,176,0.16), transparent 55%);
+}
+
+#t4-logo .t4-mark {
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.14em;
+    color: var(--accent);
+}
+
+#t4-logo .t4-title {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+/* Controls */
+.t4-btn {
+    position: relative;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--accent-soft);
+    background: radial-gradient(circle at 50% 0, rgba(69,255,176,0.25), rgba(8,11,18,0.95));
+    color: var(--fg);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.15s ease, border-color 0.15s ease, transform 0.05s ease;
+}
+
+.t4-btn.ghost {
+    background: rgba(5,7,10,0.9);
+    border-color: var(--border);
+}
+
+.t4-btn:hover {
+    border-color: var(--accent);
+    background: radial-gradient(circle at 50% 0, rgba(69,255,176,0.40), rgba(8,11,18,0.95));
+}
+
+.t4-btn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+.t4-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+/* Settings icon button tweaks */
+#btn-settings {
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#btn-settings-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    transition: transform 220ms cubic-bezier(.2,.9,.2,1);
+    transform-origin: 50% 50%;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.5));
+}
+
+#btn-settings:hover #btn-settings-icon,
+#btn-settings:focus #btn-settings-icon {
+    transform: rotate(18deg);
+}
+
+#btn-settings:active #btn-settings-icon {
+    transform: rotate(8deg) scale(0.98);
+}
+
+/* File label */
+#rom-input {
+    display: none;
+}
+
+.t4-file-label {
+    padding: 7px 12px;
+    border-radius: 999px;
+    border: 1px dashed var(--accent-soft);
+    color: var(--fg-muted);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.t4-select {
+    min-width: 150px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(5,7,10,0.96);
+    color: var(--fg);
+    font-size: 11px;
+    outline: none;
+}
+
+.t4-select.narrow {
+    min-width: 0;
+    width: 100%;
+}
+
+/* Toggle */
+.t4-toggle {
+    --w: 40px;
+    --h: 18px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.t4-toggle input {
+    display: none;
+}
+
+.t4-toggle-slider {
+    position: relative;
+    width: var(--w);
+    height: var(--h);
+    border-radius: 999px;
+    background: rgba(10,14,21,0.9);
+    border: 1px solid var(--border);
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.t4-toggle-slider::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--fg-muted);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+    transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+.t4-toggle input:checked + .t4-toggle-slider {
+    background: radial-gradient(circle at 0 0, rgba(69,255,176,0.5), rgba(6,10,15,0.9));
+    border-color: var(--accent);
+}
+
+.t4-toggle input:checked + .t4-toggle-slider::after {
+    transform: translateX(20px);
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(69,255,176,0.6);
+}
+
+/* Layout */
+#layout {
+    flex: 1 1 auto;
+    display: flex;
+    min-height: 0;
+}
+
+/* Side Panel */
+#side-panel {
+    flex: 0 0 260px;
+    max-width: 300px;
+    padding: 10px 10px 10px 14px;
+    background: linear-gradient(180deg, rgba(5,7,10,0.96), rgba(3,5,8,0.98));
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.panel-section {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: radial-gradient(circle at top, rgba(69,255,176,0.12), rgba(3,5,8,0.95));
+    padding: 10px 10px 9px;
+}
+
+.panel-title {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+
+.field-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.field-label {
+    font-size: 11px;
+    color: var(--fg-muted);
+}
+
+#corrupt-intensity {
+    flex: 1;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: 999px;
+    background: rgba(20,28,40,0.9);
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px rgba(69,255,176,0.7);
+    cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+}
+
+.hint {
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--fg-muted);
+    line-height: 1.4;
+}
+
+/* Playfield */
+#playfield {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 10px 14px 10px 10px;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+#emulator-shell {
+    position: relative;
+    flex: 1 1 auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: radial-gradient(circle at top, rgba(69,255,176,0.1), rgba(2,4,7,0.98));
+    box-shadow: 0 18px 50px rgba(0,0,0,0.85);
+    overflow: hidden;
+    display: flex;
+}
+
+/* Overlay for drag/drop */
+#emulator-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#drop-hint {
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px dashed var(--accent-soft);
+    background: rgba(5,7,10,0.85);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+/* Emulator container */
+#emulator {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* Make EmulatorJS canvas fill */
+#emulator canvas {
+    width: 100% !important;
+    height: 100% !important;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+/* Corruption effect wrappers */
+.ejs-corrupt-wrap {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.ejs-corrupt-wrap-inner {
+    position: relative;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    transition: transform 0.05s linear;
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+    #t4-bar {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 6px 8px;
+        row-gap: 4px;
+    }
+    #t4-bar .t4-center {
+        order: 3;
+        flex: 0 0 100%;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+    #t4-bar .t4-right {
+        margin-left: auto;
+    }
+
+    /* Hide desktop-only controls on mobile and surface mobile corruption buttons instead */
+    #btn-pause,
+    #btn-reset,
+    #btn-fullscreen {
+        display: none;
+    }
+
+    /* Mobile-only corruption buttons: hidden on desktop by default; shown here */
+    .mobile-only {
+        display: inline-flex;
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(5,7,10,0.9);
+        color: var(--fg);
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        outline: none;
+    }
+
+    /* Slightly reduce size on small screens */
+    .mobile-only {
+        padding: 6px 10px;
+        font-size: 10px;
+    }
+
+    #side-panel {
+        display: none;
+    }
+    #layout {
+        flex-direction: column;
+    }
+    #playfield {
+        padding: 6px;
+    }
+    #emulator-shell {
+        border-radius: 8px;
+    }
+    #drop-hint {
+        font-size: 9px;
+        letter-spacing: 0.12em;
+    }
+}

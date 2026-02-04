@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>T4CTIC Corruptor - EmulatorJS</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="emulator.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="app-root">
+    <!-- TOP BAR (T4CTIC-STYLE) -->
+    <header id="t4-bar">
+        <div class="t4-left">
+            <div id="t4-logo">
+                <span class="t4-mark">Niegoli's Emulator</span>
+            </div>
+        </div>
+
+        <div class="t4-center">
+            <button class="t4-btn" id="btn-load-rom">LOAD ROM</button>
+            <input type="file" id="rom-input" accept=".nes,.sfc,.smc,.gba,.gb,.gbc,.n64,.z64,.v64,.bin,.cue,.iso,.zip,.7z,.rar,.gg,.md,.bin,.nds,.gen" />
+            <select id="core-select" class="t4-select" title="Core">
+                <option value="">AUTO CORE</option>
+                <option value="n64">Nintendo 64</option>
+                <option value="gb">Nintendo Game Boy</option>
+                <option value="gba">Nintendo Game Boy Advance</option>
+                <option value="nds">Nintendo DS</option>
+                <option value="nes">Nintendo Entertainment System</option>
+                <option value="snes">Super Nintendo Entertainment System</option>
+                <option value="psx">PlayStation</option>
+                <option value="vb">Virtual Boy</option>
+                <option value="segaMD">Sega Mega Drive</option>
+                <option value="segaMS">Sega Master System</option>
+                <option value="segaCD">Sega CD</option>
+                <option value="lynx">Atari Lynx</option>
+                <option value="sega32x">Sega 32X</option>
+                <option value="jaguar">Atari Jaguar</option>
+                <option value="segaGG">Sega Game Gear</option>
+                <option value="segaSaturn">Sega Saturn</option>
+                <option value="atari7800">Atari 7800</option>
+                <option value="atari2600">Atari 2600</option>
+                <option value="pce">NEC TurboGrafx-16/SuperGrafx/PC Engine</option>
+                <option value="pcfx">NEC PC-FX</option>
+                <option value="ngp">SNK NeoGeo Pocket (Color)</option>
+                <option value="ws">Bandai WonderSwan (Color)</option>
+                <option value="coleco">ColecoVision</option>
+                <option value="vice_x64">Commodore 64</option>
+                <option value="vice_x128">Commodore 128</option>
+                <option value="vice_xvic">Commodore VIC20</option>
+                <option value="vice_xplus4">Commodore Plus/4</option>
+                <option value="vice_xpet">Commodore PET</option>
+                <option value="psp">PlayStation Portable</option>
+                <option value="dosbox_pure">DOS</option>
+            </select>
+        </div>
+
+        <div class="t4-right">
+            <button class="t4-btn ghost" id="btn-pause">PAUSE</button>
+            <button class="t4-btn ghost" id="btn-reset">RESET</button>
+            <button class="t4-btn ghost" id="btn-fullscreen">FULLSCREEN</button>
+
+            <button class="t4-btn ghost" id="btn-settings" title="Settings" aria-label="Settings">
+                <img src="settings.png" alt="Settings" id="btn-settings-icon" />
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN LAYOUT -->
+    <main id="layout">
+        <!-- TOOLS PANEL -->
+        <section id="side-panel">
+            <div class="panel-section">
+                <div class="panel-title">TOOLS</div>
+
+                <div class="field-row">
+                    <label class="field-label">Utilities</label>
+                    <div style="display:flex; gap:8px;">
+                        <button class="t4-btn" id="btn-export-save">EXPORT SAVE</button>
+                        <button class="t4-btn" id="btn-import-save">IMPORT SAVE</button>
+                    </div>
+                </div>
+
+                <div class="hint">
+                    Corruption tools have been removed from this interface.
+                </div>
+            </div>
+        </section>
+
+        <!-- EMULATOR AREA -->
+        <section id="playfield">
+            <div id="emulator-shell">
+                <div id="emulator-overlay">
+                    <div id="drop-hint">
+                        DROP ROM HERE
+                    </div>
+                </div>
+                <div id="emulator"></div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Import map (placeholder for future ESM deps via esm.sh) -->
+<script type="importmap">
+{
+  "imports": {
+  }
+}
+</script>
+
+<!-- Local helpers -->
+<script src="corruption.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
